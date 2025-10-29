@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { themeTokens, focusStyles, resetStyles } from '../theme/theme.js';
 
@@ -206,9 +206,6 @@ export class LitButton extends LitElement {
     `;
   }
 }
-
-// Import nothing for conditional rendering
-import { nothing } from 'lit';
 
 declare global {
   interface HTMLElementTagNameMap {
