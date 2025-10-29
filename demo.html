@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lit Library Demo</title>
+    <script type="module" src="./dist/index.js"></script>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+          Arial, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: #f5f5f5;
+      }
+
+      h1 {
+        color: #212121;
+        border-bottom: 2px solid #1976d2;
+        padding-bottom: 0.5rem;
+      }
+
+      section {
+        background: white;
+        padding: 2rem;
+        margin: 2rem 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        color: #1976d2;
+        margin-top: 0;
+      }
+
+      .demo-group {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+      }
+
+      .demo-item {
+        margin: 0.5rem 0;
+      }
+
+      .result {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f5f5f5;
+        border-radius: 4px;
+        min-height: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>@skpstg/lit-library Demo</h1>
+
+    <section>
+      <h2>Button Component</h2>
+      <div class="demo-group">
+        <div class="demo-item">
+          <h3>Variants</h3>
+          <lit-button variant="primary">Primary</lit-button>
+          <lit-button variant="secondary">Secondary</lit-button>
+          <lit-button variant="outlined">Outlined</lit-button>
+          <lit-button variant="text">Text</lit-button>
+          <lit-button variant="primary" disabled>Disabled</lit-button>
+        </div>
+
+        <div class="demo-item">
+          <h3>Sizes</h3>
+          <lit-button size="small">Small</lit-button>
+          <lit-button size="medium">Medium</lit-button>
+          <lit-button size="large">Large</lit-button>
+        </div>
+
+        <div class="demo-item">
+          <h3>Full Width</h3>
+          <lit-button variant="primary" fullwidth>Full Width Button</lit-button>
+        </div>
+      </div>
+
+      <div class="result" id="button-result">Click a button to see the result</div>
+    </section>
+
+    <section>
+      <h2>Input Component</h2>
+      <div class="demo-group">
+        <div class="demo-item" style="flex: 1; min-width: 300px">
+          <lit-input
+            id="name-input"
+            label="Name"
+            placeholder="Enter your name"
+            helper-text="Your full name"
+          ></lit-input>
+        </div>
+
+        <div class="demo-item" style="flex: 1; min-width: 300px">
+          <lit-input
+            id="email-input"
+            label="Email"
+            type="email"
+            placeholder="Enter your email"
+            required
+          ></lit-input>
+        </div>
+
+        <div class="demo-item" style="flex: 1; min-width: 300px">
+          <lit-input
+            id="password-input"
+            label="Password"
+            type="password"
+            minlength="8"
+            helper-text="At least 8 characters"
+          ></lit-input>
+        </div>
+
+        <div class="demo-item" style="flex: 1; min-width: 300px">
+          <lit-input
+            label="Disabled Input"
+            value="Cannot edit"
+            disabled
+          ></lit-input>
+        </div>
+
+        <div class="demo-item" style="flex: 1; min-width: 300px">
+          <lit-input
+            label="Input with Error"
+            value="invalid@"
+            error-message="Invalid email format"
+          ></lit-input>
+        </div>
+      </div>
+
+      <div class="result" id="input-result">Type in an input to see the value</div>
+    </section>
+
+    <section>
+      <h2>Card Component</h2>
+      <div class="demo-group">
+        <lit-card variant="default" style="flex: 1; min-width: 300px">
+          <h3 slot="header">Default Card</h3>
+          <p>This is a default card with some content.</p>
+          <div slot="footer">
+            <lit-button variant="text">Action</lit-button>
+          </div>
+        </lit-card>
+
+        <lit-card variant="elevated" style="flex: 1; min-width: 300px">
+          <h3 slot="header">Elevated Card</h3>
+          <p>This card has a larger shadow for emphasis.</p>
+          <div slot="footer">
+            <lit-button variant="primary" size="small">Learn More</lit-button>
+          </div>
+        </lit-card>
+
+        <lit-card variant="outlined" style="flex: 1; min-width: 300px">
+          <h3 slot="header">Outlined Card</h3>
+          <p>This card has a border instead of a shadow.</p>
+          <div slot="footer">
+            <lit-button variant="outlined" size="small">View Details</lit-button>
+          </div>
+        </lit-card>
+      </div>
+    </section>
+
+    <section>
+      <h2>Theming Example</h2>
+      <div style="
+        --lit-color-primary: #9c27b0;
+        --lit-color-secondary: #ff5722;
+        --lit-border-radius-md: 16px;
+      ">
+        <p>This section uses custom theme colors:</p>
+        <lit-button variant="primary">Custom Primary</lit-button>
+        <lit-button variant="secondary">Custom Secondary</lit-button>
+        <lit-input label="Custom Input" placeholder="Rounded corners"></lit-input>
+      </div>
+    </section>
+
+    <script>
+      // Add event listeners for buttons
+      document.querySelectorAll('lit-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+          const resultDiv = document.getElementById('button-result');
+          const text = e.target.textContent.trim();
+          const variant = e.target.getAttribute('variant') || 'primary';
+          const disabled = e.target.hasAttribute('disabled');
+          resultDiv.innerHTML = `
+            <strong>Button clicked!</strong><br>
+            Text: ${text}<br>
+            Variant: ${variant}<br>
+            Disabled: ${disabled}
+          `;
+        });
+      });
+
+      // Add event listeners for inputs
+      const nameInput = document.getElementById('name-input');
+      const emailInput = document.getElementById('email-input');
+      const passwordInput = document.getElementById('password-input');
+      const inputResult = document.getElementById('input-result');
+
+      [nameInput, emailInput, passwordInput].forEach(input => {
+        input.addEventListener('input', (e) => {
+          inputResult.innerHTML = `
+            <strong>Input changed!</strong><br>
+            Label: ${e.target.label}<br>
+            Value: ${e.detail.value}<br>
+            Type: ${e.target.type}
+          `;
+        });
+      });
+    </script>
+  </body>
+</html>
