@@ -188,12 +188,18 @@
           const text = e.target.textContent.trim();
           const variant = e.target.getAttribute('variant') || 'primary';
           const disabled = e.target.hasAttribute('disabled');
-          resultDiv.innerHTML = `
-            <strong>Button clicked!</strong><br>
-            Text: ${text}<br>
-            Variant: ${variant}<br>
-            Disabled: ${disabled}
-          `;
+          
+          // Use textContent instead of innerHTML to prevent XSS
+          resultDiv.textContent = '';
+          const strong = document.createElement('strong');
+          strong.textContent = 'Button clicked!';
+          resultDiv.appendChild(strong);
+          resultDiv.appendChild(document.createElement('br'));
+          resultDiv.appendChild(document.createTextNode(`Text: ${text}`));
+          resultDiv.appendChild(document.createElement('br'));
+          resultDiv.appendChild(document.createTextNode(`Variant: ${variant}`));
+          resultDiv.appendChild(document.createElement('br'));
+          resultDiv.appendChild(document.createTextNode(`Disabled: ${disabled}`));
         });
       });
 
@@ -205,12 +211,17 @@
 
       [nameInput, emailInput, passwordInput].forEach(input => {
         input.addEventListener('input', (e) => {
-          inputResult.innerHTML = `
-            <strong>Input changed!</strong><br>
-            Label: ${e.target.label}<br>
-            Value: ${e.detail.value}<br>
-            Type: ${e.target.type}
-          `;
+          // Use textContent instead of innerHTML to prevent XSS
+          inputResult.textContent = '';
+          const strong = document.createElement('strong');
+          strong.textContent = 'Input changed!';
+          inputResult.appendChild(strong);
+          inputResult.appendChild(document.createElement('br'));
+          inputResult.appendChild(document.createTextNode(`Label: ${e.target.label}`));
+          inputResult.appendChild(document.createElement('br'));
+          inputResult.appendChild(document.createTextNode(`Value: ${e.detail.value}`));
+          inputResult.appendChild(document.createElement('br'));
+          inputResult.appendChild(document.createTextNode(`Type: ${e.target.type}`));
         });
       });
     </script>
