@@ -3,7 +3,9 @@ import { esbuildPlugin } from '@web/dev-server-esbuild';
 
 export default {
   files: 'src/**/*.spec.ts',
-  nodeResolve: true,
+  nodeResolve: {
+    extensions: ['.ts', '.js', '.mjs'],
+  },
   coverage: true,
   coverageConfig: {
     threshold: {
