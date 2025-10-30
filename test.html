@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Component Test</title>
+    <script type="module">
+      // Import the components
+      import './dist/index.js';
+
+      // Test that components are defined
+      window.addEventListener('DOMContentLoaded', () => {
+        const button = document.querySelector('lit-button');
+        const input = document.querySelector('lit-input');
+        const card = document.querySelector('lit-card');
+
+        console.log('Button element:', button);
+        console.log('Input element:', input);
+        console.log('Card element:', card);
+
+        // Verify components are registered
+        console.log('lit-button registered:', customElements.get('lit-button') !== undefined);
+        console.log('lit-input registered:', customElements.get('lit-input') !== undefined);
+        console.log('lit-card registered:', customElements.get('lit-card') !== undefined);
+      });
+    </script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .test-section {
+        margin: 2rem 0;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Component Test Page</h1>
+
+    <div class="test-section">
+      <h2>Button Test</h2>
+      <lit-button variant="primary">Test Button</lit-button>
+    </div>
+
+    <div class="test-section">
+      <h2>Input Test</h2>
+      <lit-input label="Test Input" placeholder="Type here"></lit-input>
+    </div>
+
+    <div class="test-section">
+      <h2>Card Test</h2>
+      <lit-card>
+        <h3 slot="header">Test Card</h3>
+        <p>This is a test card component.</p>
+      </lit-card>
+    </div>
+  </body>
+</html>
